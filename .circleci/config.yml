@@ -12,10 +12,10 @@ jobs:
     steps:
       - run:
         command: curl https://install.meteor.com | /bin/sh
-  install:
-    docker:
-      - image: circleci/node@3.0.0
-  #   steps:
+  # install:
+  #   docker:
+  #     - image: circleci/node@3.0.0
+  # #   steps:
   #     - run:
   #       command: npm install
   # # test:
