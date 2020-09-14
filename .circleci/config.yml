@@ -6,10 +6,30 @@ orbs:
 #     version: 1
 #     "basic test":
 jobs:
-  steps:
-    - run:
-      command: curl https://install.meteor.com | /bin/sh
-    - run:
-      command: npm install
-    - run:
-      command: meteor npm test
+  build:
+    docker:
+      - image: circleci/node@3.0.0
+    steps:
+      - run:
+        command: curl https://install.meteor.com | /bin/sh
+  install:
+    docker:
+      - image: circleci/node@3.0.0
+    steps:
+      - run:
+        command: npm install
+  test:
+    docker:
+      - image: circleci/node@3.0.0
+    steps:
+      - run:
+        command: meteor npm test
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - install
+      - test:
+          requires:
+            - build
