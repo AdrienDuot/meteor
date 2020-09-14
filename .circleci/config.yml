@@ -1,10 +1,12 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
-workflows:
-  "basic test":
-    jobs:
-      steps:
-        - run: curl https://install.meteor.com | /bin/sh
-        - run: npm install
-        - run: meteor npm test
+# orbs:
+#   node: circleci/node@3.0.0
+# workflows:
+#   workflow:
+#     version: 1
+#     "basic test":
+jobs:
+  steps:
+    - run: curl https://install.meteor.com | /bin/sh
+    - run: npm install
+    - run: meteor npm test
