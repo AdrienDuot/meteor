@@ -6,11 +6,10 @@ orbs:
 #     version: 1
 #     "basic test":
 jobs:
-  build:
-    steps:
-      - run:
-        command: curl https://install.meteor.com | /bin/sh
-      - run:
-        command: npm install
-      - run:
-        command: meteor npm test
+  steps:
+    - run:
+      command: curl https://install.meteor.com | /bin/sh
+    - run:
+      command: npm install
+    - run:
+      command: meteor npm test
