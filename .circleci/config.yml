@@ -15,21 +15,21 @@ jobs:
   install:
     docker:
       - image: circleci/node@3.0.0
-    steps:
-      - run:
-        command: npm install
-  test:
-    docker:
-      - image: circleci/node@3.0.0
-    steps:
-      - run:
-        command: meteor npm test
+  #   steps:
+  #     - run:
+  #       command: npm install
+  # # test:
+  #   docker:
+  #     - image: circleci/node@3.0.0
+  #   steps:
+  #     - run:
+  #       command: meteor npm test
 
 workflows:
   build_and_test:
     jobs:
       - build
-      - install
-      - test:
-          requires:
-            - build
+      # - install
+      # - test:
+      #     requires:
+      #       - build
