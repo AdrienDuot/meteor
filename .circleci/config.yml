@@ -18,8 +18,9 @@ jobs:
       tag: '10.4'
     steps:
       - checkout
-      - store_test_results:
-        path: "/tmp/artifacts"
+      - run: echo "test"
+      # - store_test_results:
+      #   path: "/tmp/artifacts"
       
       # - store_artifacts:
       #   path: /tmp/artifacts
