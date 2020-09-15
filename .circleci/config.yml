@@ -16,7 +16,8 @@ jobs:
     executor:
       name: node/default
       tag: '10.4'
-    steps:   
+    steps:
+      - checkout
       - store_test_results:
         path: "/tmp/artifacts"
       
