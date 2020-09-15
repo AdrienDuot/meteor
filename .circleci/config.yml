@@ -1,4 +1,4 @@
-version: 1.0
+version: 2.1
 orbs:
   node: circleci/node@1.1
 jobs:
@@ -12,7 +12,8 @@ jobs:
       - run: npm install
       - run: mkdir /tmp/artifacts
       - run: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml meteor test --once --driver-package meteortesting:mocha
-      - store_test_results:
-        path: /tmp/artifacts
-      - store_artifacts:
-        path: /tmp/artifacts
+      - name:
+        - store_test_results:
+          path: /tmp/artifacts
+        - store_artifacts:
+          path: /tmp/artifacts
