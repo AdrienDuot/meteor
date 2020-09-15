@@ -23,7 +23,7 @@ jobs:
       # - store_artifacts:
       #   path: /tmp/artifacts
 workflows:
-version: 2.1
+  version: 2.1
   build:
     jobs:
       - prepare
