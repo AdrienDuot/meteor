@@ -20,7 +20,6 @@ describe("simple-todos-vue", function () {
       assert.strictEqual(Meteor.isClient, false);
     });
   }
-  
 });
 
 
