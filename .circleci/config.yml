@@ -12,8 +12,8 @@ jobs:
       - run: npm install
       - run: mkdir /tmp/artifacts
       - run: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml meteor test --once --driver-package meteortesting:mocha
-      - checkout:
-        - store_test_results:
-          path: /tmp/artifacts
+      - checkout
+      - store_test_results:
+        path: /tmp/artifacts
       # - store_artifacts:
       #   path: $PWD/tmp
