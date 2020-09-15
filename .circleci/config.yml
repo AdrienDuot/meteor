@@ -8,10 +8,12 @@ jobs:
       tag: '10.4'
     steps:
       - checkout
-      - run: echo "<note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Dont forget me this weekend!</body></note>" >> tmp
-
       - run: bash <(curl -s https://install.meteor.com)
       - node/with-cache:
           steps:
             - run: npm install
-      - run: meteor npm test
+      - run: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=$PWD/tmp/unit_server.xml CLIENT_MOCHA_OUTPUT=$PWD/tmp/unit_client.xml meteor test --once --driver-package meteortesting:mocha
+      - store_test_results:
+        path: $PWD/tmp
+      - store_artifacts:
+        path: $PWD/tmp
