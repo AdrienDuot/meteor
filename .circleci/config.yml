@@ -1,35 +1,50 @@
-version: 2.1
-orbs:
-  node: circleci/node@3.0.0
+# version: 2.1
+# orbs:
+#   node: circleci/node@3.0.0
 # workflows:
 #   workflow:
 #     version: 1
 #     "basic test":
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/node@3.0.0
+#     steps:
+#       - run:
+#         command: curl https://install.meteor.com | /bin/sh
+#   install:
+#     docker:
+#       - image: circleci/node@3.0.0
+#   #   steps:
+#       - run:
+#         command: npm install
+#   # test:
+#     docker:
+#       - image: circleci/node@3.0.0
+#     steps:
+#       - run:
+#         command: meteor npm test
+
+# workflows:
+#   build_and_test:
+#     jobs:
+#       - build
+#       - install
+#       - test:
+#           requires:
+#             - build
+
+version: 2.1
+orbs:
+  node: circleci/node@1.1
 jobs:
   build:
-    docker:
-      - image: circleci/node@3.0.0
+    executor:
+      name: node/default
+      tag: '10.4'
     steps:
-      - run:
-        command: curl https://install.meteor.com | /bin/sh
-  # install:
-  #   docker:
-  #     - image: circleci/node@3.0.0
-  # #   steps:
-  #     - run:
-  #       command: npm install
-  # # test:
-  #   docker:
-  #     - image: circleci/node@3.0.0
-  #   steps:
-  #     - run:
-  #       command: meteor npm test
-
-workflows:
-  build_and_test:
-    jobs:
-      - build
-      # - install
-      # - test:
-      #     requires:
-      #       - build
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+      - run: meteor npm test
