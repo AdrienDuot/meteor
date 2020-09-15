@@ -12,8 +12,8 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-      - run: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=$PWD/tmp/unit_server.xml CLIENT_MOCHA_OUTPUT=$PWD/tmp/unit_client.xml meteor test --once --driver-package meteortesting:mocha
+      - run: bash <(MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=$PWD/tmp/unit_server.xml CLIENT_MOCHA_OUTPUT=$PWD/tmp/unit_client.xml meteor test --once --driver-package meteortesting:mocha)
       - store_test_results:
         path: $PWD/tmp
-      - store_artifacts:
-        path: $PWD/tmp
+      # - store_artifacts:
+      #   path: $PWD/tmp
