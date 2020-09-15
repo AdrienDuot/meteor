@@ -11,7 +11,7 @@ jobs:
       - run: bash <(curl -s https://install.meteor.com)
       - run: npm install
       - run: mkdir ~/tmp
-      - run: bash <(MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=~/tmp/unit_server.xml CLIENT_MOCHA_OUTPUT=~/tmp/unit_client.xml meteor test --once --driver-package meteortesting:mocha)
+      - run: meteor test --once --driver-package meteortesting:mocha
       # - store_test_results:
       #   path: $PWD/tmp
       # - store_artifacts:
