@@ -25,3 +25,4 @@ accounts-password
 vuejs:blaze-integration
 meteortesting:mocha
 practicalmeteor:mocha
+meteortesting:browser-tests

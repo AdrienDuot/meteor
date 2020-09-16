@@ -10,10 +10,11 @@ jobs:
         - checkout
         - run: bash <(curl -s https://install.meteor.com)
         - run: npm install
+        - run: npm i --save-dev puppeteer@^1.5.0
         - run: mkdir /tmp/artifacts
         - run:
             name: execute meteor test
-            command: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml meteor test --once --driver-package meteortesting:mocha
+            command: MOCHA_REPORTER=xunit TEST_BROWSER_DRIVER=puppeteer SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml meteor test --once --driver-package meteortesting:mocha > /tmp/client
             when: always
         
     save:
@@ -22,6 +23,9 @@ jobs:
             tag: '10.4'
         steps:
             - checkout
+            - run:
+                name: purify console output
+                command: ./create_client.sh /tmp/client /tmp/artifacts/unit_server.xml
             - store_test_results:
                 path: /tmp/artifacts
             - store_artifacts:
