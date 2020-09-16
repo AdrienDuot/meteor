@@ -1,22 +1,33 @@
 version: 2.1
-orbs:
-  node: circleci/node@1.1
+# orbs:
+#   node: circleci/node@1.1
 jobs:
-  prepare:
-    executor:
-      name: node/default
-      tag: '10.4'
+  build:
+    docker:
+      - image: ubuntu:18.04
     steps:
       - checkout
       - run: bash <(curl -s https://install.meteor.com)
       - run: npm install
       - run: mkdir /tmp/artifacts
-      - run: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml meteor test --once --driver-package meteortesting:mocha
-      - run: cat /tmp/artifacts/unit_server.xml
-      - run: cat /tmp/artifacts/unit_client.xml
-      # - store_test_results:
-      #   path: /tmp/artifacts
+      - run:
+          command: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml meteor test --once --driver-package meteortesting:mocha
+          when: always
+      - store_test_results:
+          path: /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts 
+
+      # steps:
+    #   - checkout
+    #   - run: bash <(curl -s https://install.meteor.com)
+    #   - run: npm install
+    #   - run: mkdir /tmp/artifacts
+    #   - run: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml meteor test --once --driver-package meteortesting:mocha
+    #   - store_test_results:
+    #     path: /tmp/artifacts
   
+     
   # save:
   #   executor:
   #     name: node/default
@@ -30,10 +41,10 @@ jobs:
       
       # - store_artifacts:
       #   path: /tmp/artifacts
-workflows:
-  version: 2.1
-  build:
-    jobs:
-      - prepare
+# workflows:
+#   version: 2.1
+#   build:
+#     jobs:
+#       - prepare
       # - save
         
