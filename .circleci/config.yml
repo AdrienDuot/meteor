@@ -16,7 +16,7 @@ jobs:
             name: execute meteor test client
             command: TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha > /tmp/client
             when: always
-         - run:
+        - run:
             name: execute meteor test server
             command: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml meteor test --once --driver-package meteortesting:mocha > /dev/null
             when: always
