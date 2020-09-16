@@ -11,13 +11,13 @@ jobs:
         - run: bash <(curl -s https://install.meteor.com)
         - run: npm i --save-dev puppeteer@^1.5.0
         - run: npm install
-        - run: meteor add meteortesting:browser-tests
+        # - run: meteor add meteortesting:browser-tests
         - run: mkdir /tmp/artifacts
         - run:
             name: execute meteor test
-            command: MOCHA_REPORTER=xunitTEST_BROWSER_DRIVER=puppeteer SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml  meteor test --once --driver-package meteortesting:mocha #> /tmp/client
+            command: MOCHA_REPORTER=xunitTEST_BROWSER_DRIVER=puppeteer SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml  CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml  meteor test --once --driver-package meteortesting:mocha #> /tmp/client
             when: always
-        # CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml
+        #
     save:
         executor:
             name: node/default
