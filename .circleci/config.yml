@@ -10,12 +10,12 @@ jobs:
         - checkout
         - run: bash <(curl -s https://install.meteor.com)
         - run: npm install
-        - run: meteor npm i --save-dev selenium-webdriver chromedriver
+        - run: meteor npm i --save-dev selenium-webdriver@3.6.0 chromedriver@2.35.0
         - run: meteor npm install --save bcrypt
         - run: mkdir /tmp/artifacts
         - run:
             name: execute meteor test
-            command: MOCHA_REPORTER=xunit TEST_BROWSER_DRIVER=chrome SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml  CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml  meteor test --once --driver-package meteortesting:mocha  /tmp/artifacts/client
+            command: MOCHA_REPORTER=xunit TEST_BROWSER_DRIVER=chrome SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml  CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml  meteor test --once --driver-package meteortesting:mocha #> /tmp/artifacts/client
             when: always
         - store_artifacts:
             path: /tmp/artifacts
