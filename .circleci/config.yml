@@ -13,14 +13,10 @@ jobs:
         - run: npm i --save-dev puppeteer@^1.5.0
         - run: mkdir /tmp/artifacts
         - run:
-            name: execute meteor test client
-            command: TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha > /tmp/client
+            name: execute meteor test
+            command: MOCHA_REPORTER=xunitTEST_BROWSER_DRIVER=puppeteer SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml  meteor test --once --driver-package meteortesting:mocha #> /tmp/client
             when: always
-        - run:
-            name: execute meteor test server
-            command: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml meteor test --once --driver-package meteortesting:mocha > /dev/null
-            when: always
-        
+        # CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml
     save:
         executor:
             name: node/default
@@ -43,4 +39,4 @@ workflows:
             - save:
                 requires:
                     - prepare
-
+        

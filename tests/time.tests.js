@@ -10,7 +10,7 @@ describe("make it crash", function(){
       while (i < 100000) {
         i += 1;
       };
-      assert.strictEqual(true, false)
+      //assert.strictEqual(true, false)
     });
     it("is slow", function () {
       i = 0;
