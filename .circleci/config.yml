@@ -10,7 +10,7 @@ jobs:
         - checkout
         - run: bash <(curl -s https://install.meteor.com)
         - run: npm install
-        - run: meteor npm i --save-dev selenium-webdriver@3.6.0 chromedriver@2.35.0
+        - run: meteor npm i --save-dev selenium-webdriver@^3.6.0 chromedriver@^2.41.0
         - run: meteor npm install --save bcrypt
         - run: mkdir /tmp/artifacts
         - run:
