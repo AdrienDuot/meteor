@@ -12,15 +12,21 @@ jobs:
       - run: npm install
       - run: mkdir /tmp/artifacts
       - run: MOCHA_REPORTER=xunit SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml meteor test --once --driver-package meteortesting:mocha
-  save:
-    executor:
-      name: node/default
-      tag: '10.4'
-    steps:
-      - checkout
       - run: cat /tmp/artifacts/unit_server.xml
+      - run: cat /tmp/artifacts/unit_client.xml
       # - store_test_results:
-      #   path: "/tmp/artifacts"
+      #   path: /tmp/artifacts
+  
+  # save:
+  #   executor:
+  #     name: node/default
+  #     tag: '10.4'
+  #   steps:
+  #     - checkout
+  #     - run: cat /tmp/artifacts/unit_server.xml
+  #   requires:
+  #     - prepare
+     
       
       # - store_artifacts:
       #   path: /tmp/artifacts
@@ -29,6 +35,5 @@ workflows:
   build:
     jobs:
       - prepare
-      - save:
-        requires:
-          - prepare
+      # - save
+        
