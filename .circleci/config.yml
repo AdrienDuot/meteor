@@ -29,4 +29,6 @@ workflows:
   build:
     jobs:
       - prepare
-      - save #work silmutalneously make a when 
+      - save:
+        - requires:
+          - prepare
