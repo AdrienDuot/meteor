@@ -18,7 +18,7 @@ jobs:
       tag: '10.4'
     steps:
       - checkout
-      - run: echo "test"
+      - run: cat /tmp/artifacts/unit_server.xml
       # - store_test_results:
       #   path: "/tmp/artifacts"
       
@@ -29,4 +29,4 @@ workflows:
   build:
     jobs:
       - prepare
-      - save
+      - save #work silmutalneously make a when 
