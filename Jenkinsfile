@@ -4,7 +4,7 @@ pipeline {
     //   label 'config'
     // }
 
-  }
+  // }
   stages {
     stage('install meteor') {
       steps {
