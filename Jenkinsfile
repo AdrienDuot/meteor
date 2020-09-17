@@ -1,8 +1,8 @@
 pipeline {
-  agent {
-    node {
-      label 'config'
-    }
+  agent any //{
+    // node {
+    //   label 'config'
+    // }
 
   }
   stages {
