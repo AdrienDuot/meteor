@@ -21,3 +21,5 @@ do
 done <<<$x
 
 echo -e $tmp > $2
+
+exit 0
