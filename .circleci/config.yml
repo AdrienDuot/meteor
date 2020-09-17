@@ -9,6 +9,7 @@ jobs:
         steps:
         - checkout
         - run: bash <(curl -s https://install.meteor.com)
+        - run: meteor update
         - run: npm install
         # - run: meteor npm i --save-dev selenium-webdriver@^3.6.0 chromedriver@^2.41.0
         - run:  npm i --save-dev puppeteer@1.5.0
