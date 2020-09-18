@@ -1,8 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'node:6-alpine'
-      args '-p 3000:3000'
+      image 'node:6.3'
     }
 
   }
@@ -23,12 +22,12 @@ pipeline {
         sh 'MOCHA_REPORTER=xunit TEST_BROWSER_DRIVER=puppeteer SERVER_MOCHA_OUTPUT=/tmp/artifacts/unit_server.xml  CLIENT_MOCHA_OUTPUT=/tmp/artifacts/unit_client.xml  meteor test --once --driver-package meteortesting:mocha'
       }
     }
-
-    stage('store test') {
-      steps {
-        archiveArtifacts(artifacts: '/tmp/artifacts', allowEmptyArchive: true)
-      }
-    }
-
   }
+  post {
+    always {
+      archiveArtifacts(artifacts: '/tmp/artifacts', allowEmptyArchive: true)
+      junit '/tmp/artifacts/*.xml'
+    }
+  }
+  
 }
